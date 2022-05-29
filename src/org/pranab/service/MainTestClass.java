@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 public class MainTestClass {
     public static void main(String[] args) {
@@ -12,6 +13,14 @@ public class MainTestClass {
         try {
             zipUtils = new ZipUtils();
             File zipFile = new File("F:\\demo.zip");
+
+
+            ZipFile file = new ZipFile("F:\\demo.zip");
+            file.stream().forEach(x -> {
+                System.out.println(x.getName());
+            });
+
+
             String destDirectory = "D:\\unzip" + zipUtils.removeExtension(zipFile.getName());
             JSONObject response = zipUtils.unzip(zipFile, destDirectory);
             files = (ArrayList)response.get("files");
@@ -41,20 +50,15 @@ public class MainTestClass {
         if(directory.exists()){
             File[] files = directory.listFiles();
             if(files != null){
-                for(int i=0; i<files.length; i++) {
-                    if(files[i].isDirectory()) {
-                        deleteDirectory(files[i]);
-                    }
-                    else {
-                        files[i].delete();
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        deleteDirectory(file);
+                    } else {
+                        file.delete();
                     }
                 }
             }
         }
         return(directory.delete());
-    }
-
-    public int add(int a, int b){
-        return a+b;
     }
 }
