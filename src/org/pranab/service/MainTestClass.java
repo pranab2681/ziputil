@@ -53,4 +53,8 @@ public class MainTestClass {
         }
         return(directory.delete());
     }
+
+    public int add(int a, int b){
+        return a+b;
+    }
 }
