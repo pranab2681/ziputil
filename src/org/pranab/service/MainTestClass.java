@@ -17,7 +17,7 @@ public class MainTestClass {
 
             ZipFile file = new ZipFile("F:\\demo.zip");
             file.stream().forEach(x -> {
-                System.out.println(x.getName());
+                System.out.println("File name present in zip file is" + x.getName());
             });
 
 
